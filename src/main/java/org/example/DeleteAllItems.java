@@ -24,15 +24,15 @@ public class DeleteAllItems {
             webDriver.get("https://henderson.ru/");
             webDriver.manage().window().setSize(new Dimension(1300, 720));
 
+        // приходится закрывать много всплывающих окон
         webDriver.findElement(By.className("fancybox-close-small")).click();
         webDriver.findElement(By.className("i-close")).click();
-        //здесь последовательный переход  по категориям
+
+        //здесь последовательный переход  по категориям для добавления товара
         webDriver.findElement(By.xpath("//div[@class='nav']//a[@href='/catalog/footwear/']")).click();
         webDriver.findElement(By.xpath("//div[@class='left_nav as_filter']//a[.='Ботинки']")).click();
-
         List<WebElement> products = webDriver.findElements(By.xpath("//div[@class='list-product']//div[contains(@class,'list-product__item')]//div[@class='card-product__wrap-img']"));
         products.get(4).click();
-
         webDriver.findElement(By.xpath("//a[@class='btn js-btn-cart']")).click();
         webDriver.findElement(By.xpath("//span[contains(@class,'select2-dropdown')]//li[.='43']")).click();
 
@@ -41,6 +41,7 @@ public class DeleteAllItems {
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='product-added__buttons']/a[@href='/cart/']")))
                 .click();
 
+        // собственно удаление
        webDriver.findElement(By.xpath(" //div[@class='cart-header__right']//button[contains(@class,'btn-delete-products')]")).click();
 
        // заготовка под ассершн

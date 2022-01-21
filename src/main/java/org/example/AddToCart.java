@@ -20,6 +20,7 @@ public class AddToCart {
         webDriver.get("https://henderson.ru/");
         webDriver.manage().window().setSize(new Dimension(1300, 720));
 
+        // приходится закрывать много всплывающих окон
         webDriver.findElement(By.className("fancybox-close-small")).click();
         webDriver.findElement(By.className("i-close")).click();
         new Actions(webDriver)
