@@ -1,8 +1,11 @@
 package objectpage_lesson.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,7 +45,8 @@ public class CartPage extends BasePage {
 
     public CartPage controlNonDeliveringMessage(String location){
         assertThat(cityForDelivering.getAttribute("value")).isEqualTo(location);
-        assertThat(deliveringErrorText.getText().contains("К сожалению, доставка в выбранный вами населённый пункт не осуществляется."));
+        new WebDriverWait(webDriver, 4).until(ExpectedConditions.visibilityOf(deliveringErrorText));
+        //  или вот такой вариант: assertThat(deliveringErrorText.isEnabled());
         return this;
     }
 
@@ -66,7 +70,8 @@ public class CartPage extends BasePage {
     }
 
     public CartPage controlDeleting() {
-        assertThat(emptyCart.isEnabled());
+        new WebDriverWait(webDriver, 4).until(ExpectedConditions.visibilityOf(emptyCart));
+        //как вариант: assertThat(emptyCart.isEnabled());
         return new CartPage(webDriver);
     }
 }

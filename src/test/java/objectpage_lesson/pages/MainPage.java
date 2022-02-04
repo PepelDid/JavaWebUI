@@ -5,8 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainPage extends BasePage{
     @FindBy(xpath = "//div[@class='acc_in']/a[@href='/hlogin/']")
@@ -50,7 +50,7 @@ public class MainPage extends BasePage{
     public MainPage changeCity (String newCity){
         city.click();
         webDriver.findElement(By.xpath(String.format("//div[@class='rezult_form_filter_city']//a[contains(text(),'%s')]", newCity))).click();
-        assertThat(city.getText().contains(newCity));
+        new WebDriverWait(webDriver, 4).until(ExpectedConditions.textToBePresentInElement(city, "Липецк"));
         return new MainPage(webDriver);
     }
 
