@@ -1,6 +1,6 @@
-package objectpage_lesson.pages;
+package objectpage_and_allure.pages;
 
-import org.openqa.selenium.By;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,23 +38,24 @@ public class CartPage extends BasePage {
         super(webDriver);
     }
 
+    @Step("Проверить наличие в корзине выбранного товара")
     public CartPage controlOneItemInCart(){
         assertThat(itemInfoCard.isEnabled());
         return this;
     }
-
+    @Step("Проверить наличие сообщения о невозможности доставки")
     public CartPage controlNonDeliveringMessage(String location){
         assertThat(cityForDelivering.getAttribute("value")).isEqualTo(location);
         new WebDriverWait(webDriver, 4).until(ExpectedConditions.visibilityOf(deliveringErrorText));
         //  или вот такой вариант: assertThat(deliveringErrorText.isEnabled());
         return this;
     }
-
+    @Step("Кликнуть на кнопку Оформить заказ")
     public CartPage clickCheckoutButton(){
         checkOutButton.click();
         return  new CartPage(webDriver);
     }
-
+    @Step("Проверить наличие в корзине двух выбранных товаров")
     public void controlTwoItemsInCart(String urlProduct1, String urlProduct2) {
         assertThat(product1InCart
                 .getAttribute("href"))
@@ -63,12 +64,12 @@ public class CartPage extends BasePage {
                 .getAttribute("href"))
                 .isEqualTo(urlProduct2);
     }
-
+    @Step("Кликнуть на кнопку Удалить все")
     public CartPage deleteAllItems() {
         deleteButton.click();
         return new CartPage(webDriver);
     }
-
+    @Step("Проверить,что корзина пуста")
     public CartPage controlDeleting() {
         new WebDriverWait(webDriver, 4).until(ExpectedConditions.visibilityOf(emptyCart));
         //как вариант: assertThat(emptyCart.isEnabled());

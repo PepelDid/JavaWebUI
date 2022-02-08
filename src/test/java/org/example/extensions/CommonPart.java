@@ -23,7 +23,7 @@ public class CommonPart implements BeforeEachCallback, AfterEachCallback {
 
         webDriver = WebDriverManager.chromedriver().capabilities(chromeOptions).create();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        webDriver.manage().window().setSize(new Dimension(1300, 720));
+        webDriver.manage().window().setSize(new Dimension(1300, 920));
         js = (JavascriptExecutor) webDriver;
         webDriver.get("https://henderson.ru/");
 

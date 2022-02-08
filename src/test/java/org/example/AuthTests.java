@@ -30,12 +30,15 @@ public class AuthTests {
         authForm.findElement(By.className("mi_cart_step_button")).click();
 
         By cabinet = By.tagName("h1");
-        new WebDriverWait(webDriver, 10).until(ExpectedConditions.presenceOfElementLocated(cabinet));
+        new WebDriverWait(webDriver, 5).until(ExpectedConditions.presenceOfElementLocated(cabinet));
 
         assertThat(webDriver.findElement(cabinet).getText().contains("Личный кабинет"));
 
-        //в AfterEach тестов по аутентификации прописать
-        // webDriver.findElement(By.xpath("//div[@class='acc_in']/a[@href='/logout/']")).click();
+        new WebDriverWait(webDriver, 3)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='acc_in']/a[@href='/logout/']")))
+                .click();
+        webDriver.findElement(By.xpath("//div[@class='acc_in']/a[@href='/hlogin/']")).isEnabled();
+
 
     }
 

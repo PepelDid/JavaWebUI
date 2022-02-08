@@ -1,5 +1,6 @@
-package objectpage_lesson.pages;
+package objectpage_and_allure.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,29 +23,30 @@ public class ItemPage extends BasePage {
         super(webDriver);
     }
 
+    @Step("Кликнуть на кнопку Добавить в корзину")
     public ItemPage clickBuyButton(){
         buyButton.click();
         return new ItemPage(webDriver);
     }
-
+    @Step("Кликнуть на Выберите размер и выбрать доступный для заказа размер")
     public ItemPage selectSize(){
         selectSize43.click();
         return new ItemPage(webDriver);
     }
-
+    @Step("Кликнуть на кнопку Перейти в корзину")
     public CartPage goToCart(){
         new WebDriverWait(webDriver, 8)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='product-added__buttons']/a[@href='/cart/']")))
                 .click();
         return new CartPage(webDriver);
     }
-
+    @Step("Кликнуть на кнопку Вернуться к покупкам")
     public ItemPage backToBuying(){
         new WebDriverWait(webDriver, 8)
                 .until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@data-fancybox-close]"))).click();
         return new ItemPage(webDriver);
     }
-
+    @Step("Кликнуть на ссылку субкаталога Сандали и шлепанцы в хлебных крошках")
     public ProductsPage backToSandal(){
         sandalOnBreadcrumb.click();
         return new ProductsPage(webDriver);

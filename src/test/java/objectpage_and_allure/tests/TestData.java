@@ -1,13 +1,14 @@
-package objectpage_lesson.tests;
+package objectpage_and_allure.tests;
 
 import org.openqa.selenium.WebElement;
-
 import java.util.List;
+import java.util.Random;
 
 public class TestData {
     String login = "npapublic@gmail.com";
     String password = "60740520";
-    String wrongPassword = "123456";
+    Random random = new Random();  // рандомный неправильный пароль
+    String wrongPassword = String.valueOf(random.nextInt(999999) + 100000);
     String errorText = "Вход не выполнен";
 
     String newCity = "Липецк";
@@ -20,5 +21,4 @@ public class TestData {
     List<WebElement> products;
     String urlProduct1;
     String urlProduct2;
-
 }

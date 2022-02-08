@@ -1,7 +1,9 @@
-package objectpage_lesson.tests;
+package objectpage_and_allure.tests;
 
-import objectpage_lesson.pages.MainPage;
-import objectpage_lesson.pages.ProductsPage;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import objectpage_and_allure.pages.MainPage;
+import objectpage_and_allure.pages.ProductsPage;
 import org.example.extensions.CommonPart;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,11 +11,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.example.extensions.CommonPart.webDriver;
 
+@DisplayName("Добавление в корзину")
 public class AddToCartTests extends  TestData{
 
     @Test
     @DisplayName("Добавление в корзину 1 товарa")
     @ExtendWith(CommonPart.class)
+    @Severity(SeverityLevel.BLOCKER)
     void addToCartOneItem(){
         products = new MainPage(webDriver).moveOnSandal()
                 .getListOfItems();
@@ -27,6 +31,7 @@ public class AddToCartTests extends  TestData{
     @Test
     @DisplayName("Добавление в корзину 2 товаров")
     @ExtendWith(CommonPart.class)
+    @Severity(SeverityLevel.BLOCKER)
     void addToCartTwoItems(){
         products = new MainPage(webDriver).moveOnSandal()
                 .getListOfItems();

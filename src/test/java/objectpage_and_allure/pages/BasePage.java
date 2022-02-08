@@ -1,4 +1,4 @@
-package objectpage_lesson.pages;
+package objectpage_and_allure.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;

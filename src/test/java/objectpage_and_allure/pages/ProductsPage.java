@@ -1,5 +1,6 @@
-package objectpage_lesson.pages;
+package objectpage_and_allure.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,21 +16,23 @@ public class ProductsPage extends BasePage{
         super(webDriver);
     }
 
+
     public List<WebElement> getListOfItems(){
         List<WebElement> products = productsOnPage;
         return products;
     }
-
+    @Step("Кликнуть на продукт")
     public ItemPage chooseShoes(List<WebElement> products, int number){
         products.get(number).click();
         return new ItemPage(webDriver);
     }
-
+    @Step("Зафиксировать идентификатор продукта")
     public String getURLProduct(List<WebElement> products, int number){
         String urlProduct = products.get(number).findElement(By.xpath(".//a[@href]")).getAttribute("href");
         return urlProduct;
     }
 
+    @Step("Кликнуть на чемодан")
     public ItemPage chooseSuitcase(int number){
         webDriver.findElement(By.xpath("//div[@class='list-product']//div[contains(@class,'list-product__item')][" + number + "]//div[@class='card-product__wrap-img']")).click();
         return new ItemPage(webDriver);

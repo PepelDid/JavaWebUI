@@ -1,5 +1,6 @@
-package objectpage_lesson.pages;
+package objectpage_and_allure.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,35 +38,43 @@ public class MainPage extends BasePage{
         super(webDriver);
     }
 
+    @Step("Кликнуть на кнопку Войти")
     public LoginPage clickLoginButton(){
         loginButton.click();
         return new LoginPage(webDriver);
     }
 
+    @Step("Проверить наличие на странице кнопки Войти")
     public MainPage checkOutProfile(){
         loginButton.isEnabled();
         return this;
     }
-
+    @Step("Изменить город на {0}")
     public MainPage changeCity (String newCity){
         city.click();
         webDriver.findElement(By.xpath(String.format("//div[@class='rezult_form_filter_city']//a[contains(text(),'%s')]", newCity))).click();
-        new WebDriverWait(webDriver, 4).until(ExpectedConditions.textToBePresentInElement(city, "Липецк"));
+        //new WebDriverWait(webDriver, 4).until(ExpectedConditions.textToBePresentInElement(city, "Липецк"));
         return new MainPage(webDriver);
     }
 
+    @Step("Проверить ,что город изменен на выбранный")
+    public MainPage controlNewCity (){
+        new WebDriverWait(webDriver, 4).until(ExpectedConditions.textToBePresentInElement(city, "Липецк"));
+        return this;
+    }
+    @Step("Выбрать населенный пункт сельского типа")
     public MainPage chooseVillage(String  village){
         city.click();
         citySearch.sendKeys(village);
         selectFirstCity.click();
         return new MainPage(webDriver);
     }
-
+    @Step("Запомнить выбранный населенный пункт сельского типа")
     public String findVillageLocator(){
         String location = city.getText();
         return location;
     }
-
+    @Step("Навести курсор на субкаталог Обувь и выбрать в выпадающем подменю Сандали")
     public ProductsPage moveOnSandal(){
         new Actions(webDriver)
                 .moveToElement(selectFootwear)
@@ -74,7 +83,7 @@ public class MainPage extends BasePage{
         selectSandal.click();
         return new ProductsPage(webDriver);
     }
-
+    @Step("Кликнуть на субкаталог Чемоданы")
     public ProductsPage moveOnSuitcase(){
         new Actions(webDriver)
                 .moveToElement(selectBags)

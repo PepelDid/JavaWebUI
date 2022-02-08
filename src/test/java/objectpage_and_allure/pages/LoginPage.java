@@ -1,5 +1,6 @@
-package objectpage_lesson.pages;
+package objectpage_and_allure.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +18,9 @@ public class LoginPage extends BasePage{
    @FindBy(className = "mi_cart_step_button")
    WebElement authFormButton;
 
+   @FindBy(tagName = "h1")
+   WebElement profile;
+
 /* @FindBy (xpath = "//div[@class='acc_in']/a[@href='/logout/']")
    WebElement logoutButton;
    в Waiter  метода  public MainPage logout()совсем не хочет работать конструкция
@@ -27,6 +31,7 @@ public class LoginPage extends BasePage{
     public LoginPage(WebDriver webDriver) {
         super(webDriver);}
 
+    @Step("Ввести логин {0} и пароль {1} в соответствующие поля формы и нажать на кнопку Войти")
     public LoginPage login(String login, String password){
         new WebDriverWait(webDriver, 5).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//form[@class='mi_cabinet_window_inputs']")));
 
@@ -35,18 +40,18 @@ public class LoginPage extends BasePage{
         authFormButton.click();
         return new LoginPage(webDriver);
     }
-
+    @Step("Проверить,что переход в личный кабинет произошел")
     public LoginPage checkBeInProfile(){
         new WebDriverWait(webDriver, 8)
-                .until(ExpectedConditions.invisibilityOfElementWithText(By.tagName("h1"), "Личный кабинет"));
+                .until(ExpectedConditions.visibilityOf(profile));
         return this;
     }
-
+    @Step("Проверить наличие сообщение о неправильном логине или пароле")
     public LoginPage checkError(String errorText){
         assertThat(webDriver.findElement(By.xpath("//*[contains(text(),'" + errorText + "')]")).isEnabled());
         return this;
     }
-
+    @Step("Проверить наличие кнопки Выйти")
     public MainPage logout(){
         new WebDriverWait(webDriver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='acc_in']/a[@href='/logout/']")))
